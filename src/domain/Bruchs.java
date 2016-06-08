@@ -4,17 +4,17 @@ public class Bruchs {
 
     int testGGT(final Bruch bruch1) {
         int ggt = 1;
-        if (bruch1.nenner == bruch1.zaehler) {
-            ggt = bruch1.nenner;
-        } else if (bruch1.nenner > bruch1.zaehler) {
-            for (int i = bruch1.zaehler; i > 0; i--) {
-                if (bruch1.nenner % i == 0 && bruch1.zaehler % i == 0 && ggt == 1) {
+        if (bruch1.getNenner() == bruch1.getZaehler()) {
+            ggt = bruch1.getNenner();
+        } else if (bruch1.getNenner() > bruch1.getZaehler()) {
+            for (int i = bruch1.getZaehler(); i > 0; i--) {
+                if (bruch1.getNenner() % i == 0 && bruch1.getZaehler()% i == 0 && ggt == 1) {
                     ggt = i;
                 }
             }
-        } else if (bruch1.zaehler > bruch1.nenner) {
-            for (int i = bruch1.nenner; i > 0; i--) {
-                if (bruch1.zaehler % i == 0 && bruch1.nenner % i == 0 && ggt == 1) {
+        } else if (bruch1.getZaehler() > bruch1.getNenner()) {
+            for (int i = bruch1.getNenner(); i > 0; i--) {
+                if (bruch1.getZaehler() % i == 0 && bruch1.getNenner()% i == 0 && ggt == 1) {
                     ggt = i;
                 }
             }
@@ -24,40 +24,47 @@ public class Bruchs {
 
     int testKGV(final Bruch bruch1, final Bruch bruch2) {
         int kgv = 1;
-        if (bruch1.nenner == bruch2.nenner) {
-            kgv = bruch1.nenner;
-        } else if (bruch1.nenner < bruch2.nenner) {
-            for (int i = bruch1.nenner; i < bruch2.nenner*bruch1.nenner; i++) {
-                if (i % bruch1.nenner == 0 && i % bruch2.nenner == 0 && kgv == 1) {
+        if (bruch1.getNenner() == bruch2.getNenner()) {
+            kgv = bruch1.getNenner();
+        } else if (bruch1.getNenner() < bruch2.getNenner()) {
+            for (int i = bruch1.getNenner(); i < bruch2.getNenner()*bruch1.getNenner(); i++) {
+                if (i % bruch1.getNenner() == 0 && i % bruch2.getNenner() == 0 && kgv == 1) {
                     kgv = i;
                 }
             }
-        } else if (bruch2.nenner < bruch1.nenner) {
-            for (int i = bruch2.nenner; i < bruch1.nenner*bruch2.nenner; i++) {
-                if (i % bruch2.nenner == 0 && i % bruch1.nenner == 0 && kgv == 1) {
+        } else if (bruch2.getNenner() < bruch1.getNenner()) {
+            for (int i = bruch2.getNenner(); i < bruch1.getNenner()*bruch2.getNenner(); i++) {
+                if (i % bruch2.getNenner() == 0 && i % bruch1.getNenner() == 0 && kgv == 1) {
                     kgv = i;
                 }
             }
         }
         return kgv;
     }
+
     public Bruch zuGanzzahl (final Bruch bruch1) {
-        int ganzzahl = 0;
-        if (bruch1.zaehler < bruch1.nenner) {
-            bruch1.ganzzahl = (ganzzahl + bruch1.ganzzahl);
-        } else if (bruch1.zaehler >= bruch1.nenner) {
-            ganzzahl = bruch1.zaehler/bruch1.nenner;
-            bruch1.zaehler = (bruch1.zaehler - (ganzzahl*bruch1.nenner));
-            bruch1.ganzzahl = (ganzzahl + bruch1.ganzzahl);
+        int zaehlerneu = 0, ganzzahlneu = 0, nenneralt = 0;
+        if (bruch1.getZaehler() < bruch1.getNenner()) {
+            ganzzahlneu = (ganzzahlneu + bruch1.getGanzzahl());
+            zaehlerneu = bruch1.getZaehler();
+            nenneralt = bruch1.getNenner();
+        } else if (bruch1.getZaehler() >= bruch1.getNenner()) {
+            ganzzahlneu = bruch1.getZaehler()/bruch1.getNenner();
+            ganzzahlneu = (ganzzahlneu + bruch1.getGanzzahl());
+            zaehlerneu = (bruch1.getZaehler() - (ganzzahlneu*bruch1.getNenner()));
+            nenneralt = bruch1.getNenner();
         }
-        return bruch1;
+        return new Bruch(zaehlerneu, nenneralt, ganzzahlneu);
     }
+
     public Bruch vonGanzzahl (final Bruch bruch1) {
-        if (bruch1.ganzzahl >= 1) {
-            final int multiplikator = bruch1.nenner;
-            bruch1.zaehler = ((multiplikator*bruch1.ganzzahl)+bruch1.zaehler);
-            bruch1.ganzzahl = 0;
+        int zaehlerneu = 0, ganzzahlneu = 0, nenneralt = 0;
+        if (bruch1.getGanzzahl() >= 1) {
+            final int multiplikator = bruch1.getNenner();
+            ganzzahlneu = 0;
+            zaehlerneu = ((multiplikator*bruch1.getGanzzahl())+bruch1.getZaehler());
+            nenneralt = bruch1.getNenner();
         }
-        return bruch1;
+        return new Bruch(zaehlerneu,nenneralt,ganzzahlneu);
     }
 }

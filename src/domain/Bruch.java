@@ -1,9 +1,9 @@
 package domain;
 
 public class Bruch {
-    int zaehler;
-    int nenner;
-    int ganzzahl;
+    private int zaehler;
+    private int nenner;
+    private int ganzzahl;
 
     public Bruch() {
         zaehler = 0;
@@ -26,16 +26,6 @@ public class Bruch {
     public int getZaehler() {
         return zaehler;
     }
-
-    /*public void setGanzzahl(final int ganzzahl) {
-        this.ganzzahl = ganzzahl;
-    }
-    public void setNenner(final int nenner) {
-        this.nenner = nenner;
-    }
-    public void setZaehler(final int zaehler) {
-        this.zaehler = zaehler;
-    }*/
 
     public String anzeigen() {
         return ganzzahl+" "+zaehler+"/"+nenner;
