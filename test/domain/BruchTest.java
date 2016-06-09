@@ -2,6 +2,9 @@ package domain;
 
 import org.junit.Test;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
+
 public class BruchTest {
 
     @Test
@@ -10,7 +13,7 @@ public class BruchTest {
         Bruch bruch = new Bruch(1,2,-8745);
         //when
         //then
-        assert bruch.getGanzzahl()== -8745;
+        assertThat(bruch.getGanzzahl(), is(-8745));
     }
 
     @Test
@@ -21,9 +24,9 @@ public class BruchTest {
         //when
         Bruch produkt = bruch1.mul(bruch2);
         //then
-        assert produkt.getZaehler() == 119;
-        assert produkt.getNenner() == 6;
-        assert produkt.getGanzzahl() == 0;
+        assertThat(produkt.getZaehler(), is(119));
+        assertThat(produkt.getNenner(), is(6));
+        assertThat(produkt.getGanzzahl(), is(0));
     }
 
     @Test
@@ -34,8 +37,8 @@ public class BruchTest {
         //when
         Bruch produkt = bruch1.div(bruch2);
         //then
-        assert produkt.getZaehler() == 1;
-        assert produkt.getNenner() == 2;
-        assert produkt.getGanzzahl() == 0;
+        assertThat(produkt.getZaehler(), is(1));
+        assertThat(produkt.getNenner(), is(2));
+        assertThat(produkt.getGanzzahl(), is(0));
     }
 }
