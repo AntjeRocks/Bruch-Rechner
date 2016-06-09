@@ -1,9 +1,10 @@
 package domain;
 
 public class Bruch {
+
+    private int ganzzahl;
     private int zaehler;
     private int nenner;
-    private int ganzzahl;
 
     public Bruch() {
         zaehler = 0;
@@ -11,7 +12,7 @@ public class Bruch {
         ganzzahl = 0;
     }
 
-    public Bruch(final int zaehler,final int nenner, final int ganzzahl) {
+    public Bruch(final int ganzzahl, final int zaehler, final int nenner) {
         this.nenner = nenner;
         this.zaehler = zaehler;
         this.ganzzahl = ganzzahl;
@@ -20,9 +21,11 @@ public class Bruch {
     int getGanzzahl() {
         return ganzzahl;
     }
+
     int getNenner() {
         return nenner;
     }
+
     int getZaehler() {
         return zaehler;
     }
@@ -37,17 +40,18 @@ public class Bruch {
         }
 
     }
+
     public String toString(){
         return "Ganzzahl: " + ganzzahl + "Zähler: " + zaehler + ", Nenner: " + nenner;
     }
 
     public Bruch mul(final Bruch faktor2) {
-        final Bruch produkt = new Bruch((((this.ganzzahl*this.nenner)+this.zaehler)*((faktor2.ganzzahl*faktor2.nenner)+faktor2.zaehler)),(this.nenner*faktor2.nenner),0);
-        return new Bruch((produkt.getZaehler()/new Bruchs().testGGT(produkt)),(produkt.getNenner()/new Bruchs().testGGT(produkt)),0);
+        final Bruch produkt = new Bruch(0, (((this.ganzzahl*this.nenner)+this.zaehler)*((faktor2.ganzzahl*faktor2.nenner)+faktor2.zaehler)),(this.nenner*faktor2.nenner));
+        return new Bruch(0, (produkt.getZaehler()/new Bruchs().testGGT(produkt)),(produkt.getNenner()/new Bruchs().testGGT(produkt)));
     }
 
     public Bruch div (final Bruch divisor) {
-        final Bruch kehrwehrt = new Bruch(divisor.getNenner(),divisor.getZaehler(),divisor.getGanzzahl());
+        final Bruch kehrwehrt = new Bruch(divisor.getGanzzahl(), divisor.getNenner(),divisor.getZaehler());
         return this.mul(kehrwehrt);
     }
 
@@ -106,5 +110,4 @@ public class Bruch {
         differenz.nenner = differenz.nenner/normal;
         return differenz;
     }
-
 }

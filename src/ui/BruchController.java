@@ -2,7 +2,6 @@ package ui;
 
 import domain.Bruch;
 import domain.Bruchs;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
@@ -29,8 +28,8 @@ public class BruchController {
     private Bruch aktuellesErgebnis = new Bruch();
 
     public void los() {
-        Bruch bruch1 = new Bruch((Integer.parseInt(zaehler1.getText())), (Integer.parseInt(nenner1.getText())),0);
-        final Bruch bruch2 = new Bruch((Integer.parseInt(zaehler2.getText())), (Integer.parseInt(nenner2.getText())),0);
+        Bruch bruch1 = new Bruch(0, (Integer.parseInt(zaehler1.getText())), (Integer.parseInt(nenner1.getText())));
+        final Bruch bruch2 = new Bruch(0, (Integer.parseInt(zaehler2.getText())), (Integer.parseInt(nenner2.getText())));
         switch (operator) {
             case "+":
                 aktuellesErgebnis = bruch1.add(bruch2);

@@ -54,7 +54,7 @@ public class Bruchs {
             zaehlerneu = (bruch1.getZaehler() - (ganzzahlneu*bruch1.getNenner()));
             nenneralt = bruch1.getNenner();
         }
-        return new Bruch(zaehlerneu, nenneralt, ganzzahlneu);
+        return new Bruch(ganzzahlneu, zaehlerneu, nenneralt);
     }
 
     public Bruch vonGanzzahl (final Bruch bruch1) {
@@ -65,6 +65,6 @@ public class Bruchs {
             zaehlerneu = ((multiplikator*bruch1.getGanzzahl())+bruch1.getZaehler());
             nenneralt = bruch1.getNenner();
         }
-        return new Bruch(zaehlerneu,nenneralt,ganzzahlneu);
+        return new Bruch(ganzzahlneu, zaehlerneu,nenneralt);
     }
 }

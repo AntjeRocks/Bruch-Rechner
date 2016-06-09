@@ -10,8 +10,10 @@ public class BruchTest {
     @Test
     public void shouldGetGanzzahl() throws Exception {
         //given
-        Bruch bruch = new Bruch(1,2,-8745);
+        Bruch bruch = new Bruch(-8745, 1, 2);
+
         //when
+
         //then
         assertThat(bruch.getGanzzahl(), is(-8745));
     }
@@ -19,10 +21,12 @@ public class BruchTest {
     @Test
     public void shouldMultiply() throws Exception {
         //given
-        Bruch bruch1 = new Bruch(15,1,2);
-        Bruch bruch2 = new Bruch(1,6,1);
+        Bruch bruch1 = new Bruch(2, 15, 1);
+        Bruch bruch2 = new Bruch(1, 1, 6);
+
         //when
         Bruch produkt = bruch1.mul(bruch2);
+
         //then
         assertThat(produkt.getZaehler(), is(119));
         assertThat(produkt.getNenner(), is(6));
@@ -32,10 +36,12 @@ public class BruchTest {
     @Test
     public void shouldDivide() throws Exception {
         //given
-        Bruch bruch1 = new Bruch(1,4,0);
-        Bruch bruch2 = new Bruch(1,2,0);
+        Bruch bruch1 = new Bruch(0, 1, 4);
+        Bruch bruch2 = new Bruch(0, 1, 2);
+
         //when
         Bruch produkt = bruch1.div(bruch2);
+
         //then
         assertThat(produkt.getZaehler(), is(1));
         assertThat(produkt.getNenner(), is(2));
