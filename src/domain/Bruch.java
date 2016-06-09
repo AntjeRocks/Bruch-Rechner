@@ -17,41 +17,38 @@ public class Bruch {
         this.ganzzahl = ganzzahl;
     }
 
-    public int getGanzzahl() {
+    int getGanzzahl() {
         return ganzzahl;
     }
-    public int getNenner() {
+    int getNenner() {
         return nenner;
     }
-    public int getZaehler() {
+    int getZaehler() {
         return zaehler;
     }
 
     public String anzeigen() {
-        return ganzzahl+" "+zaehler+"/"+nenner;
+        if (this.zaehler > 0) {
+            return ganzzahl+" "+zaehler+"/"+nenner;
+        } else if (this.zaehler <= 0) {
+            return ganzzahl+ " 0/0";
+        } else {
+            return "Fehler";
+        }
+
     }
     public String toString(){
         return "Ganzzahl: " + ganzzahl + "Zähler: " + zaehler + ", Nenner: " + nenner;
     }
 
     public Bruch mul(final Bruch faktor2) {
-        final Bruch produkt = new Bruch();
-        produkt.zaehler = this.zaehler*faktor2.zaehler;
-        produkt.nenner = this.nenner*faktor2.nenner;
-        final int normal = new Bruchs().testGGT(produkt);
-        produkt.zaehler = produkt.zaehler/normal;
-        produkt.nenner = produkt.nenner/normal;
-        return produkt;
+        final Bruch produkt = new Bruch((((this.ganzzahl*this.nenner)+this.zaehler)*((faktor2.ganzzahl*faktor2.nenner)+faktor2.zaehler)),(this.nenner*faktor2.nenner),0);
+        return new Bruch((produkt.getZaehler()/new Bruchs().testGGT(produkt)),(produkt.getNenner()/new Bruchs().testGGT(produkt)),0);
     }
 
     public Bruch div (final Bruch divisor) {
-        final Bruch quotient = new Bruch();
-        quotient.zaehler = this.zaehler*divisor.nenner;
-        quotient.nenner = this.nenner*divisor.zaehler;
-        final int normal = new Bruchs().testGGT(quotient);
-        quotient.zaehler = quotient.zaehler/normal;
-        quotient.nenner = quotient.nenner/normal;
-        return quotient;
+        final Bruch kehrwehrt = new Bruch(divisor.getNenner(),divisor.getZaehler(),divisor.getGanzzahl());
+        return this.mul(kehrwehrt);
     }
 
     public Bruch add (final Bruch summand) {

@@ -9,26 +9,26 @@ import javafx.scene.control.*;
 public class BruchController {
 
     @FXML
-    TextField zaehler1 = new TextField();
+    TextField zaehler1;
     @FXML
-    TextField nenner1 = new TextField();
+    TextField nenner1;
     @FXML
-    TextField zaehler2 = new TextField();
+    TextField zaehler2;
     @FXML
-    TextField nenner2 = new TextField();
+    TextField nenner2;
     @FXML
-    Label ergebnis = new Label();
+    Label ergebnis;
     @FXML
-    ChoiceBox choiceboxi = new ChoiceBox();
+    ChoiceBox choiceboxi;
     @FXML
-    Button ganzzahlAnButton = new Button();
+    Button ganzzahlAnButton;
     @FXML
-    Button ganzzahlAusButton = new Button();
+    Button ganzzahlAusButton;
 
     private String operator = "";
     private Bruch aktuellesErgebnis = new Bruch();
 
-    public void los(final ActionEvent actionEvent) {
+    public void los() {
         Bruch bruch1 = new Bruch((Integer.parseInt(zaehler1.getText())), (Integer.parseInt(nenner1.getText())),0);
         final Bruch bruch2 = new Bruch((Integer.parseInt(zaehler2.getText())), (Integer.parseInt(nenner2.getText())),0);
         switch (operator) {
@@ -59,12 +59,12 @@ public class BruchController {
         operator = choiceboxi.getValue().toString();
     }
 
-    public void ganzzahlAn(ActionEvent actionEvent) {
+    public void ganzzahlAn() {
         aktuellesErgebnis = new Bruchs().zuGanzzahl(aktuellesErgebnis);
         ergebnis.setText(aktuellesErgebnis.anzeigen());
     }
 
-    public void ganzzahlAus(ActionEvent actionEvent) {
+    public void ganzzahlAus() {
         aktuellesErgebnis = new Bruchs().vonGanzzahl(aktuellesErgebnis);
         ergebnis.setText(aktuellesErgebnis.anzeigen());
     }
