@@ -2,7 +2,6 @@ package ui;
 
 import domain.Bruch;
 import domain.Bruchs;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
