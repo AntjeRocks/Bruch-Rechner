@@ -42,29 +42,4 @@ public class Bruchs {
         return kgv;
     }
 
-    public Bruch zuGanzzahl (final Bruch bruch1) {
-        int zaehlerneu = 0, ganzzahlneu = 0, nenneralt = 0;
-        if (bruch1.getZaehler() < bruch1.getNenner()) {
-            ganzzahlneu = (ganzzahlneu + bruch1.getGanzzahl());
-            zaehlerneu = bruch1.getZaehler();
-            nenneralt = bruch1.getNenner();
-        } else if (bruch1.getZaehler() >= bruch1.getNenner()) {
-            ganzzahlneu = bruch1.getZaehler()/bruch1.getNenner();
-            ganzzahlneu = (ganzzahlneu + bruch1.getGanzzahl());
-            zaehlerneu = (bruch1.getZaehler() - (ganzzahlneu*bruch1.getNenner()));
-            nenneralt = bruch1.getNenner();
-        }
-        return new Bruch(ganzzahlneu, zaehlerneu, nenneralt);
-    }
-
-    public Bruch vonGanzzahl (final Bruch bruch1) {
-        int zaehlerneu = 0, ganzzahlneu = 0, nenneralt = 0;
-        if (bruch1.getGanzzahl() >= 1) {
-            final int multiplikator = bruch1.getNenner();
-            ganzzahlneu = 0;
-            zaehlerneu = ((multiplikator*bruch1.getGanzzahl())+bruch1.getZaehler());
-            nenneralt = bruch1.getNenner();
-        }
-        return new Bruch(ganzzahlneu, zaehlerneu,nenneralt);
-    }
 }
