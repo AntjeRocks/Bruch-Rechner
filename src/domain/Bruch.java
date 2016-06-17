@@ -54,6 +54,16 @@ public class Bruch {
         return ganzzahl != 0;
     }
 
+    private Bruch kuerzen() {
+        final int gekürzterZaehler = (zaehler)/new Bruchs().testGGT(zaehler,nenner);
+        final int gekürzterNenner = nenner/new Bruchs().testGGT(zaehler,nenner);
+        return new Bruch(ganzzahl,gekürzterZaehler,gekürzterNenner);
+    }
+
+    private Bruch erweitern(final Bruch bruch2) {
+        return new Bruch(this.getGanzzahl(),zaehler*bruch2.getNenner(),nenner*bruch2.getNenner());
+    }
+
     public String toString(){
         return "Ganzzahl: " + ganzzahl + ", Zähler: " + zaehler + ", Nenner: " + nenner;
     }
@@ -70,60 +80,18 @@ public class Bruch {
         return mul(kehrwehrt.kuerzen());
     }
 
-    public Bruch add (final Bruch summand) {
-        final Bruch summe = new Bruch();
-        final int kgv = new Bruchs().testKGV(this, summand);
-        int multiBruch1 = 0;
-        int multiBruch2 = 0;
-        if (this.nenner != kgv && this.nenner < kgv) {
-            multiBruch1 = kgv/this.nenner;
-        } else if (this.nenner != kgv && this.nenner > kgv) {
-            multiBruch1 = this.nenner/kgv;
-        } else if (this.nenner == kgv) {
-            multiBruch1 = 1;
-        }
-        if (summand.nenner != kgv && summand.nenner < kgv) {
-            multiBruch2 = kgv/summand.nenner;
-        } else if (summand.nenner != kgv && summand.nenner > kgv) {
-            multiBruch2 = summand.nenner/kgv;
-        } else if (summand.nenner == kgv) {
-            multiBruch2 = 1;
-        }
-        summe.nenner = this.nenner*multiBruch1;
-        summe.zaehler = (this.zaehler*multiBruch1) + (summand.zaehler*multiBruch2);
-        final int normal = new Bruchs().testGGT(summe);
-        summe.zaehler = summe.zaehler/normal;
-        summe.nenner = summe.nenner/normal;
-        return summe;
+    public Bruch add (final Bruch bruch2) {
+        final Bruch summand1 = this.erweitern(bruch2);
+        final Bruch summand2 = bruch2.erweitern(this);
+        final Bruch summe = new Bruch(summand1.getGanzzahl()+summand2.getGanzzahl(),summand1.getZaehler()+summand2.getZaehler(),summand1.getNenner());
+        return summe.kuerzen();
     }
 
-    public Bruch sub (final Bruch subtrahend) {
-        final Bruch differenz = new Bruch();
-        final int kgv = new Bruchs().testKGV(this, subtrahend);
-        int multiBruch1 = 0;
-        int multiBruch2 = 0;
-        if (this.nenner != kgv && this.nenner < kgv) {
-            multiBruch1 = kgv/this.nenner;
-        } else if (this.nenner != kgv && this.nenner > kgv) {
-            multiBruch1 = this.nenner/kgv;
-        } else if (this.nenner == kgv) {
-            multiBruch1 = 1;
-        }
-        differenz.nenner = this.nenner*multiBruch1;
-        if (subtrahend.nenner != kgv && subtrahend.nenner < kgv) {
-            multiBruch2 = kgv/subtrahend.nenner;
-        } else if (subtrahend.nenner != kgv && subtrahend.nenner > kgv) {
-            multiBruch2 = this.nenner/kgv;
-        } else if (subtrahend.nenner == kgv) {
-            multiBruch2 = 1;
-        }
-        differenz.nenner = this.nenner*multiBruch1;
-        differenz.zaehler = (this.zaehler*multiBruch1) - (subtrahend.zaehler*multiBruch2);
-
-        final int normal = new Bruchs().testGGT(differenz);
-        differenz.zaehler = differenz.zaehler/normal;
-        differenz.nenner = differenz.nenner/normal;
-        return differenz;
+    public Bruch sub (final Bruch bruch2) {
+        final Bruch minuend = this.erweitern(bruch2);
+        final Bruch subtrahend = bruch2.erweitern(this);
+        final Bruch differenz = new Bruch(minuend.getGanzzahl()-subtrahend.getGanzzahl(),minuend.getZaehler()-subtrahend.getZaehler(),minuend.getNenner());
+        return differenz.kuerzen();
     }
 
     public Bruch zuGanzzahlUmwandeln() {
@@ -131,7 +99,6 @@ public class Bruch {
         if (this.getZaehler() < this.getNenner()) {
             ganzzahlneu = (ganzzahlneu + this.getGanzzahl());
             zaehlerneu = this.getZaehler();
-            System.out.println(zaehlerneu);
             nenneralt = this.getNenner();
         } else if (this.getZaehler() >= this.getNenner()) {
             ganzzahlneu = this.getZaehler()/this.getNenner();
@@ -157,9 +124,4 @@ public class Bruch {
         return new Bruch(ganzzahlneu, zaehlerneu,nenneralt);
     }
 
-    public Bruch kuerzen() {
-        final int gekürzterZaehler = zaehler/new Bruchs().testGGT(this);
-        final int gekürzterNenner = nenner/new Bruchs().testGGT(this);
-        return new Bruch(ganzzahl,gekürzterZaehler,gekürzterNenner);
-    }
 }

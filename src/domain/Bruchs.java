@@ -2,44 +2,35 @@ package domain;
 
 public class Bruchs {
 
-    int testGGT(final Bruch bruch1) {
-        int ggt = 1;
-        if (bruch1.getNenner() == bruch1.getZaehler()) {
-            ggt = bruch1.getNenner();
-        } else if (bruch1.getNenner() > bruch1.getZaehler()) {
-            for (int i = bruch1.getZaehler(); i > 0; i--) {
-                if (bruch1.getNenner() % i == 0 && bruch1.getZaehler()% i == 0 && ggt == 1) {
+    int testGGT(int zahl1, int zahl2) {
+        if (zahl1 < 0) {
+            zahl1 = zahl1*(-1);
+        }
+        if (zahl2 < 0) {
+            zahl2 = zahl2*(-1);
+        }
+        int ggt = 1337;
+        if (zahl1 == zahl2) {
+            ggt = zahl1;
+        } else if (zahl1 < zahl2) {
+            for (int i = zahl1; i > 0; i--) {
+                if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 1337) {
                     ggt = i;
                 }
             }
-        } else if (bruch1.getZaehler() > bruch1.getNenner()) {
-            for (int i = bruch1.getNenner(); i > 0; i--) {
-                if (bruch1.getZaehler() % i == 0 && bruch1.getNenner()% i == 0 && ggt == 1) {
+        } else if (zahl2 < zahl1) {
+            for (int i = zahl2; i > 0; i--) {
+                if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 1337) {
                     ggt = i;
                 }
             }
-        }
-        return ggt;
+        } return ggt;
     }
 
-    int testKGV(final Bruch bruch1, final Bruch bruch2) {
-        int kgv = 1;
-        if (bruch1.getNenner() == bruch2.getNenner()) {
-            kgv = bruch1.getNenner();
-        } else if (bruch1.getNenner() < bruch2.getNenner()) {
-            for (int i = bruch1.getNenner(); i < bruch2.getNenner()*bruch1.getNenner(); i++) {
-                if (i % bruch1.getNenner() == 0 && i % bruch2.getNenner() == 0 && kgv == 1) {
-                    kgv = i;
-                }
-            }
-        } else if (bruch2.getNenner() < bruch1.getNenner()) {
-            for (int i = bruch2.getNenner(); i < bruch1.getNenner()*bruch2.getNenner(); i++) {
-                if (i % bruch2.getNenner() == 0 && i % bruch1.getNenner() == 0 && kgv == 1) {
-                    kgv = i;
-                }
-            }
-        }
-        return kgv;
+    int testKGV(final int zahl1, final int zahl2) {
+        int kgv = (zahl1*zahl2)/testGGT(zahl1,zahl2);
+        if (kgv > 0) {
+            return kgv;
+        } else return kgv*(-1);
     }
-
 }
