@@ -54,6 +54,13 @@ public class Bruch {
         return ganzzahl != 0;
     }
 
+    private int wertVon (int zahl) {
+        if (zahl < 0) {
+            zahl*=(-1);
+        }
+        return zahl;
+    }
+
     private Bruch kuerzen() {
         final int gekürzterZaehler = (zaehler)/new Bruchs().testGGT(zaehler,nenner);
         final int gekürzterNenner = nenner/new Bruchs().testGGT(zaehler,nenner);
@@ -61,7 +68,8 @@ public class Bruch {
     }
 
     private Bruch erweitern(final Bruch bruch2) {
-        return new Bruch(this.getGanzzahl(),zaehler*bruch2.getNenner(),nenner*bruch2.getNenner());
+        final int kgv = new Bruchs().testKGV(nenner, bruch2.getNenner());
+        return new Bruch(this.getGanzzahl(),(kgv/nenner)*zaehler,kgv);
     }
 
     public String toString(){
@@ -95,33 +103,25 @@ public class Bruch {
     }
 
     public Bruch zuGanzzahlUmwandeln() {
-        int zaehlerneu = 0, ganzzahlneu = 0, nenneralt = 0;
-        if (this.getZaehler() < this.getNenner()) {
-            ganzzahlneu = (ganzzahlneu + this.getGanzzahl());
-            zaehlerneu = this.getZaehler();
-            nenneralt = this.getNenner();
-        } else if (this.getZaehler() >= this.getNenner()) {
-            ganzzahlneu = this.getZaehler()/this.getNenner();
-            ganzzahlneu = (ganzzahlneu + this.getGanzzahl());
-            zaehlerneu = (this.getZaehler() - (ganzzahlneu*this.getNenner()));
-            nenneralt = this.getNenner();
+        int ueberhang = 0;
+        if (this.wertVon(zaehler) < nenner) {
+            return this;
+        } else if (this.wertVon(zaehler) == nenner) {
+            return new Bruch(ganzzahl+1,0,nenner);
+        } else for (int i = this.wertVon(zaehler); i > 0; i--) {
+            if (i % nenner == 0 && ueberhang == 0) {
+                ueberhang = i;
+            }
         }
-        return new Bruch(ganzzahlneu, zaehlerneu, nenneralt);
+        return new Bruch(ganzzahl+(ueberhang/nenner), zaehler-ueberhang, nenner);
     }
 
     public Bruch zuBruchUmwandeln() {
-        int zaehlerneu = 0, ganzzahlneu = 0, nenneralt = 0;
         if (this.getGanzzahl() != 0) {
-            final int multiplikator = this.getNenner();
-            ganzzahlneu = 0;
-            zaehlerneu = ((multiplikator*this.getGanzzahl())+this.getZaehler());
-            nenneralt = this.getNenner();
+            return new Bruch(0,(ganzzahl*nenner)+zaehler,nenner);
         } else {
-            ganzzahlneu = this.getGanzzahl();
-            zaehlerneu = this.getZaehler();
-            nenneralt = this.getNenner();
+            return this;
         }
-        return new Bruch(ganzzahlneu, zaehlerneu,nenneralt);
     }
 
 }
