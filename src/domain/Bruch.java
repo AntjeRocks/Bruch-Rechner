@@ -54,7 +54,7 @@ public class Bruch {
         return ganzzahl != 0;
     }
 
-    private int wertVon (int zahl) {
+    private int betragVon(int zahl) {
         if (zahl < 0) {
             zahl*=(-1);
         }
@@ -68,7 +68,9 @@ public class Bruch {
     public Bruch mul(final Bruch faktor2) {
         final Bruch faktor1 = this.zuBruchUmwandeln();
         faktor2.zuBruchUmwandeln();
-        final Bruch produkt = new Bruch(0,(faktor1.zaehler*faktor2.zaehler),(faktor1.nenner*faktor2.nenner));
+        final int zaehlerMultipliziert = faktor1.zaehler*faktor2.zaehler;
+        final int nennerMultipliziert = faktor1.nenner*faktor2.nenner;
+        final Bruch produkt = new Bruch(0, zaehlerMultipliziert, nennerMultipliziert);
         return produkt.kuerzen();
     }
 
@@ -80,14 +82,18 @@ public class Bruch {
     public Bruch add (final Bruch bruch2) {
         final Bruch summand1 = this.erweitern(bruch2);
         final Bruch summand2 = bruch2.erweitern(this);
-        final Bruch summe = new Bruch(summand1.getGanzzahl()+summand2.getGanzzahl(),summand1.getZaehler()+summand2.getZaehler(),summand1.getNenner());
+        final int ganzzahlAddiert = summand1.getGanzzahl()+summand2.getGanzzahl();
+        final int zaehlerAddiert = summand1.getZaehler()+summand2.getZaehler();
+        final Bruch summe = new Bruch(ganzzahlAddiert, zaehlerAddiert, summand1.getNenner());
         return summe.kuerzen();
     }
 
     public Bruch sub (final Bruch bruch2) {
         final Bruch minuend = this.erweitern(bruch2);
         final Bruch subtrahend = bruch2.erweitern(this);
-        final Bruch differenz = new Bruch(minuend.getGanzzahl()-subtrahend.getGanzzahl(),minuend.getZaehler()-subtrahend.getZaehler(),minuend.getNenner());
+        final int ganzzahlSubtrahiert = minuend.getGanzzahl()-subtrahend.getGanzzahl();
+        final int zaehlerSubtrahiert = minuend.getZaehler()-subtrahend.getZaehler();
+        final Bruch differenz = new Bruch(ganzzahlSubtrahiert, zaehlerSubtrahiert, minuend.getNenner());
         return differenz.kuerzen();
     }
 
@@ -104,11 +110,11 @@ public class Bruch {
 
     public Bruch zuGanzzahlUmwandeln() {
         int ueberhang = 0;
-        if (this.wertVon(zaehler) < nenner) {
+        if (betragVon(zaehler) < nenner) {
             return this;
-        } else if (this.wertVon(zaehler) == nenner) {
+        } else if (betragVon(zaehler) == nenner) {
             return new Bruch(ganzzahl+1,0,nenner);
-        } else for (int i = this.wertVon(zaehler); i > 0; i--) {
+        } else for (int i = betragVon(zaehler); i > 0; i--) {
             if (i % nenner == 0 && ueberhang == 0) {
                 ueberhang = i;
             }
@@ -117,7 +123,7 @@ public class Bruch {
     }
 
     public Bruch zuBruchUmwandeln() {
-        if (this.getGanzzahl() != 0) {
+        if (ganzzahlNichtNull()) {
             return new Bruch(0,(ganzzahl*nenner)+zaehler,nenner);
         } else {
             return this;

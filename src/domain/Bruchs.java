@@ -11,16 +11,16 @@ public class Bruchs {
 
     int testGGT(int zahl1, int zahl2) {
         int ggt = 0;
-        if (this.wertVon(zahl1) == this.wertVon(zahl2)) {
+        if (wertVon(zahl1) == wertVon(zahl2)) {
             ggt = zahl1;
-        } else if (this.wertVon(zahl1) < this.wertVon(zahl2)) {
-            for (int i = this.wertVon(zahl1); i > 0; i--) {
+        } else if (wertVon(zahl1) < wertVon(zahl2)) {
+            for (int i = wertVon(zahl1); i > 0; i--) {
                 if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
                     ggt = i;
                 }
             }
-        } else if (this.wertVon(zahl2) < this.wertVon(zahl1)) {
-            for (int i = this.wertVon(zahl2); i > 0; i--) {
+        } else if (wertVon(zahl2) < wertVon(zahl1)) {
+            for (int i = wertVon(zahl2); i > 0; i--) {
                 if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
                     ggt = i;
                 }
