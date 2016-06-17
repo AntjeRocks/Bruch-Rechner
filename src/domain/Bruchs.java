@@ -2,6 +2,10 @@ package domain;
 
 public final class Bruchs {
 
+  private Bruchs() {
+    super();
+  }
+
   public static int betragVon(int zahl) {
     if (zahl < 0) {
       zahl *= (-1);
