@@ -82,4 +82,21 @@ public class BruchTest {
         assertThat (produkt.getZaehler(), is (1));
         assertThat (produkt.getNenner(), is (2));
     }
+
+    @Test
+    public void shouldErweitern() throws Exception {
+        //given
+        Bruch bruch1 = new Bruch(5,7,6);
+        Bruch bruch2 = new Bruch(3,1,55);
+        //when
+        Bruch b1ErweitertUmB2 = bruch1.erweitern(bruch2);
+        Bruch b2ErweitertUmB1 = bruch2.erweitern(bruch1);
+        //then
+        assertThat(b1ErweitertUmB2.getGanzzahl(), is(5));
+        assertThat(b1ErweitertUmB2.getZaehler(), is(385));
+        assertThat(b1ErweitertUmB2.getNenner(), is(330));
+        assertThat(b2ErweitertUmB1.getGanzzahl(), is(3));
+        assertThat(b2ErweitertUmB1.getZaehler(), is(6));
+        assertThat(b2ErweitertUmB1.getNenner(), is(330));
+    }
 }

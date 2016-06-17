@@ -61,17 +61,6 @@ public class Bruch {
         return zahl;
     }
 
-    private Bruch kuerzen() {
-        final int gekürzterZaehler = (zaehler)/new Bruchs().testGGT(zaehler,nenner);
-        final int gekürzterNenner = nenner/new Bruchs().testGGT(zaehler,nenner);
-        return new Bruch(ganzzahl,gekürzterZaehler,gekürzterNenner);
-    }
-
-    private Bruch erweitern(final Bruch bruch2) {
-        final int kgv = new Bruchs().testKGV(nenner, bruch2.getNenner());
-        return new Bruch(this.getGanzzahl(),(kgv/nenner)*zaehler,kgv);
-    }
-
     public String toString(){
         return "Ganzzahl: " + ganzzahl + ", Zähler: " + zaehler + ", Nenner: " + nenner;
     }
@@ -100,6 +89,17 @@ public class Bruch {
         final Bruch subtrahend = bruch2.erweitern(this);
         final Bruch differenz = new Bruch(minuend.getGanzzahl()-subtrahend.getGanzzahl(),minuend.getZaehler()-subtrahend.getZaehler(),minuend.getNenner());
         return differenz.kuerzen();
+    }
+
+    public Bruch kuerzen() {
+        final int gekürzterZaehler = (zaehler)/new Bruchs().testGGT(zaehler,nenner);
+        final int gekürzterNenner = nenner/new Bruchs().testGGT(zaehler,nenner);
+        return new Bruch(ganzzahl,gekürzterZaehler,gekürzterNenner);
+    }
+
+    public Bruch erweitern(final Bruch bruch2) {
+        final int kgv = new Bruchs().testKGV(nenner, bruch2.getNenner());
+        return new Bruch(this.getGanzzahl(),(kgv/nenner)*zaehler,kgv);
     }
 
     public Bruch zuGanzzahlUmwandeln() {
