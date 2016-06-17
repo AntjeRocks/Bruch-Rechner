@@ -1,47 +1,49 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Menu?>
 <?import javafx.scene.control.MenuBar?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.collections.*?>
-<?import java.lang.String?>
-
-
-<AnchorPane fx:controller="ui.BruchController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="600" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
-    <children>
-        <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="Infinity">
-            <menus>
-                <Menu  mnemonicParsing="false" text="Datei">
-                    <items>
-                        <MenuItem mnemonicParsing="false" text="Schließen"/>
-                    </items>
-                </Menu>
-            </menus>
-        </MenuBar>
-        <TextField layoutX="15.0" layoutY="40.0" fx:id="ganzzahl1" text="0" prefHeight="75.0" prefWidth="45.0" style="-fx-font-size: 25"/>
-        <TextField layoutX="65.0" layoutY="40.0" fx:id="zaehler1" text="1"/>
-        <TextField layoutX="65.0" layoutY="90.0" fx:id="nenner1" text="4"/>
-        <TextField layoutX="265.0" layoutY="40.0" fx:id="ganzzahl2" text="0" prefHeight="75.0" prefWidth="45.0" style="-fx-font-size: 25"/>
-        <TextField layoutX="315.0" layoutY="40.0" fx:id="zaehler2" text="1"/>
-        <TextField layoutX="315.0" layoutY="90.0" fx:id="nenner2" text="2"/>
-        <Button layoutX="130.0" layoutY="140.0" mnemonicParsing="false" text="Berechnen" onAction="#los"/>
-        <Button layoutX="130.0" layoutY="170.0" mnemonicParsing="false" text="Ganzzahl An" onAction="#ganzzahlAn" fx:id="ganzzahlAnButton" visible="false"/>
-        <Button layoutX="130.0" layoutY="200.0" mnemonicParsing="false" text="Ganzzahl Aus" onAction="#ganzzahlAus" fx:id="ganzzahlAusButton" visible="false"/>
-        <Label layoutX="486.0" layoutY="44.0" text="Ergebnis" fx:id="ergebnis" visible="true"/>
-        <ChoiceBox layoutX="217.5" layoutY="65.0" fx:id="choiceboxi" value="*" onAction="#selectOperator">
-            <items>
-                <FXCollections fx:factory="observableArrayList">
-                    <String fx:value="+"/>
-                    <String fx:value="-"/>
-                    <String fx:value="*"/>
-                    <String fx:value="/"/>
-                </FXCollections>
-            </items>
-        </ChoiceBox>
-    </children>
+<AnchorPane fx:controller="ui.BruchController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="600"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="Infinity">
+      <menus>
+        <Menu mnemonicParsing="false" text="Datei">
+          <items>
+            <MenuItem mnemonicParsing="false" text="Schließen"/>
+          </items>
+        </Menu>
+      </menus>
+    </MenuBar>
+    <TextField layoutX="15.0" layoutY="40.0" fx:id="ganzzahl1" text="0" prefHeight="75.0" prefWidth="45.0"
+               style="-fx-font-size: 25"/>
+    <TextField layoutX="65.0" layoutY="40.0" fx:id="zaehler1" text="1"/>
+    <TextField layoutX="65.0" layoutY="90.0" fx:id="nenner1" text="4"/>
+    <TextField layoutX="265.0" layoutY="40.0" fx:id="ganzzahl2" text="0" prefHeight="75.0" prefWidth="45.0"
+               style="-fx-font-size: 25"/>
+    <TextField layoutX="315.0" layoutY="40.0" fx:id="zaehler2" text="1"/>
+    <TextField layoutX="315.0" layoutY="90.0" fx:id="nenner2" text="2"/>
+    <Button layoutX="130.0" layoutY="140.0" mnemonicParsing="false" text="Berechnen" onAction="#los"/>
+    <Button layoutX="130.0" layoutY="170.0" mnemonicParsing="false" text="Ganzzahl An" onAction="#ganzzahlAn"
+            fx:id="ganzzahlAnButton" visible="false"/>
+    <Button layoutX="130.0" layoutY="200.0" mnemonicParsing="false" text="Ganzzahl Aus" onAction="#ganzzahlAus"
+            fx:id="ganzzahlAusButton" visible="false"/>
+    <Label layoutX="486.0" layoutY="44.0" text="Ergebnis" fx:id="ergebnis" visible="true"/>
+    <ChoiceBox layoutX="217.5" layoutY="65.0" fx:id="choiceboxi" value="*" onAction="#selectOperator">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="+"/>
+          <String fx:value="-"/>
+          <String fx:value="*"/>
+          <String fx:value="/"/>
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+  </children>
 </AnchorPane>

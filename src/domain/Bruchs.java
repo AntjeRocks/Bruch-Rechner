@@ -1,37 +1,40 @@
 package domain;
 
-public class Bruchs {
+public final class Bruchs {
 
-    private int wertVon (int zahl) {
-        if (zahl < 0) {
-            zahl*=(-1);
+  public static int betragVon(int zahl) {
+    if (zahl < 0) {
+      zahl *= (-1);
+    }
+    return zahl;
+  }
+
+  public static int testGGT(final int zahl1, final int zahl2) {
+    int ggt = 0;
+    if (betragVon(zahl1) == betragVon(zahl2)) {
+      ggt = zahl1;
+    } else if (betragVon(zahl1) < betragVon(zahl2)) {
+      for (int i = betragVon(zahl1); i > 0; i--) {
+        if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
+          ggt = i;
         }
-        return zahl;
+      }
+    } else if (betragVon(zahl2) < betragVon(zahl1)) {
+      for (int i = betragVon(zahl2); i > 0; i--) {
+        if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
+          ggt = i;
+        }
+      }
     }
+    return ggt;
+  }
 
-    int testGGT(int zahl1, int zahl2) {
-        int ggt = 0;
-        if (wertVon(zahl1) == wertVon(zahl2)) {
-            ggt = zahl1;
-        } else if (wertVon(zahl1) < wertVon(zahl2)) {
-            for (int i = wertVon(zahl1); i > 0; i--) {
-                if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
-                    ggt = i;
-                }
-            }
-        } else if (wertVon(zahl2) < wertVon(zahl1)) {
-            for (int i = wertVon(zahl2); i > 0; i--) {
-                if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
-                    ggt = i;
-                }
-            }
-        } return ggt;
+  public static int testKGV(final int zahl1, final int zahl2) {
+    final int kgv = (zahl1 * zahl2) / testGGT(zahl1, zahl2);
+    if (kgv > 0) {
+      return kgv;
+    } else {
+      return kgv * (-1);
     }
-
-    int testKGV(final int zahl1, final int zahl2) {
-        int kgv = (zahl1*zahl2)/testGGT(zahl1,zahl2);
-        if (kgv > 0) {
-            return kgv;
-        } else return kgv*(-1);
-    }
+  }
 }

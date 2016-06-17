@@ -8,17 +8,15 @@ import javafx.stage.Stage;
 
 public class BruchMain extends Application {
 
-    @Override
-    public void start(final Stage primaryStage) throws Exception{
-        final Parent root = FXMLLoader.load(getClass().getResource("/bruchRechner.fxml"));
-        primaryStage.setTitle("Bruch-Rechner");
-        primaryStage.setScene(new Scene(root, 600, 300));
-        primaryStage.show();
-    }
+  public static void main(final String[] args) {
+    launch(args);
+  }
 
-
-    public static void main(String[] args) {
-        launch(args);
-    }
+  @Override
+  public void start(final Stage primaryStage) throws Exception {
+    final Parent root = FXMLLoader.load(getClass().getResource("/bruchRechner.fxml"));
+    primaryStage.setTitle("Bruch-Rechner");
+    primaryStage.setScene(new Scene(root, 600, 300));
+    primaryStage.show();
+  }
 }
-
