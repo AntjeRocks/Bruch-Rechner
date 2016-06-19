@@ -31,32 +31,26 @@ public class Bruch {
   }
 
   public String anzeigen() {
-    if (ganzzahlNichtNull() && zaehlerNichtNull()) {
+    if (!ganzzahlIstNull() && !zaehlerIstNull()) {
       return ganzzahl + " " + zaehler + "/" + nenner;
-    } else if (ganzzahlIstNull() && zaehlerNichtNull()) {
+    } else if (ganzzahlIstNull() && !zaehlerIstNull()) {
       return zaehler + "/" + nenner;
-    } else if ((ganzzahlNichtNull()) || ganzzahlIstNull()) {
+    } else if ((!ganzzahlIstNull()) || ganzzahlIstNull()) {
       return String.valueOf(ganzzahl);
     } else {
       return "Fehler";
     }
   }
 
+  public String toString() {
+        return "Ganzzahl: " + ganzzahl + ", Zähler: " + zaehler + ", Nenner: " + nenner;
+    }
+
   private boolean ganzzahlIstNull() {
     return ganzzahl == 0;
   }
 
-  private boolean zaehlerNichtNull() {
-    return zaehler != 0;
-  }
-
-  private boolean ganzzahlNichtNull() {
-    return ganzzahl != 0;
-  }
-
-  public String toString() {
-    return "Ganzzahl: " + ganzzahl + ", Zähler: " + zaehler + ", Nenner: " + nenner;
-  }
+  private boolean zaehlerIstNull() { return zaehler == 0; }
 
   public Bruch mul(final Bruch faktor2) {
     final Bruch faktor1 = this.zuBruchUmwandeln();
@@ -91,9 +85,12 @@ public class Bruch {
   }
 
   public Bruch kuerzen() {
-    final int gekürzterZaehler = (zaehler) / Bruchs.testGGT(zaehler, nenner);
-    final int gekürzterNenner = nenner / Bruchs.testGGT(zaehler, nenner);
-    return new Bruch(ganzzahl, gekürzterZaehler, gekürzterNenner);
+      if (ganzzahl < 0 && zaehler < 0) {
+          System.out.println("ganzzahl und zaehler negativ");
+      }
+      final int gekürzterZaehler = (zaehler) / Bruchs.testGGT(zaehler, nenner);
+      final int gekürzterNenner = nenner / Bruchs.testGGT(zaehler, nenner);
+      return new Bruch(ganzzahl, gekürzterZaehler, gekürzterNenner);
   }
 
   public Bruch erweitern(final Bruch bruch2) {
@@ -118,7 +115,7 @@ public class Bruch {
   }
 
   public Bruch zuBruchUmwandeln() {
-    if (ganzzahlNichtNull()) {
+    if (!ganzzahlIstNull()) {
       return new Bruch(0, (ganzzahl * nenner) + zaehler, nenner);
     } else {
       return this;
