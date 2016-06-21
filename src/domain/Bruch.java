@@ -68,17 +68,17 @@ public class Bruch {
 
   public Bruch add(final Bruch bruch2) {
     final Bruch summand1 = zuBruchUmwandeln().erweitern(bruch2);
-      System.out.println("erweitert summand 1: "+summand1);
     final Bruch summand2 = bruch2.zuBruchUmwandeln().erweitern(this);
-      System.out.println("erweitert summand 2: "+summand2);
     final int zaehlerAddiert = summand1.getZaehler() + summand2.getZaehler();
     final Bruch summe = new Bruch(0, zaehlerAddiert, summand1.getNenner());
     return summe.kuerzen();
   }
 
   public Bruch sub(final Bruch bruch2) {
-    final Bruch minuend = this.erweitern(bruch2);
-    final Bruch subtrahend = bruch2.erweitern(this);
+    final Bruch minuend = zuBruchUmwandeln().erweitern(bruch2);
+    final Bruch subtrahend = bruch2.zuBruchUmwandeln().erweitern(this);
+      System.out.println("minuend: "+minuend);
+      System.out.println("subtrahend: "+subtrahend);
     final int ganzzahlSubtrahiert = minuend.getGanzzahl() - subtrahend.getGanzzahl();
     final int zaehlerSubtrahiert = minuend.getZaehler() - subtrahend.getZaehler();
     final Bruch differenz = new Bruch(ganzzahlSubtrahiert, zaehlerSubtrahiert, minuend.getNenner());
@@ -86,13 +86,21 @@ public class Bruch {
   }
 
   public Bruch kuerzen() {
-      int gekürzterZaehler = (zaehler) / Bruchs.ggtBerechnen(zaehler, nenner);
-      final int gekürzterNenner = nenner / Bruchs.ggtBerechnen(zaehler, nenner);
-      if (ganzzahl < 0 && zaehler < 0) {
-          System.out.println("ganzzahl und zaehler negativ");
+      if (ganzzahl <= 0) {
+          return (getKuerzung(1, 1));
+      } else if (ganzzahl > 0 && zaehler < 0) {
+          return getKuerzung(-1, -1);
+      } else {
+          return getKuerzung(1, 1);
       }
-      return new Bruch(ganzzahl, gekürzterZaehler, gekürzterNenner);
   }
+
+    private Bruch getKuerzung(final int ganzMul, final int zaehMul) {
+        int gekGanzzahl = ganzzahl*(ganzMul);
+        int gekZaehler = (zaehler*(zaehMul) / Bruchs.ggtBerechnen(zaehler, nenner));
+        int gekNenner = nenner / Bruchs.ggtBerechnen(zaehler, nenner);
+        return new Bruch(gekGanzzahl, gekZaehler, gekNenner);
+    }
 
   public Bruch erweitern(final Bruch bruch2) {
     final int kgv = Bruchs.kgvBerechnen(nenner, bruch2.getNenner());
@@ -114,9 +122,9 @@ public class Bruch {
                 }
             }
         }
-        if (ganzzahl > 0 && zaehler > 0) {
+        if (ganzzahl >= 0 && zaehler > 0) {
             return new Bruch(ganzzahl + (ueberhang / nenner), zaehler - ueberhang, nenner);
-        } else if (ganzzahl > 0 && zaehler < 0) {
+        } else if (ganzzahl >= 0 && zaehler < 0) {
             return new Bruch(ganzzahl + (ueberhang / nenner), zaehler + ueberhang, nenner);
         } else if (ganzzahl < 0 && zaehler > 0) {
             return new Bruch(ganzzahl - (ueberhang / nenner), zaehler - ueberhang, nenner);

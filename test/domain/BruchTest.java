@@ -106,8 +106,8 @@ public class BruchTest {
         final Bruch ergebnis = bruch1.add(bruch2);
 
         // then
-        assertThat(ergebnis.getGanzzahl(), is(-5));
-        assertThat(ergebnis.getZaehler(), is(3));
+        assertThat(ergebnis.getGanzzahl(), is(0));
+        assertThat(ergebnis.getZaehler(), is(-21));
         assertThat(ergebnis.getNenner(), is(4));
     }
 
@@ -121,8 +121,8 @@ public class BruchTest {
         final Bruch ergebnis = bruch1.sub(bruch2);
 
         // then
-        assertThat(ergebnis.getGanzzahl(), is(-5));
-        assertThat(ergebnis.getZaehler(), is(1));
+        assertThat(ergebnis.getGanzzahl(), is(0));
+        assertThat(ergebnis.getZaehler(), is(-25));
         assertThat(ergebnis.getNenner(), is(4));
     }
 
