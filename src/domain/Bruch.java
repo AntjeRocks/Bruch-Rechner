@@ -18,15 +18,15 @@ public class Bruch {
     this.nenner = nenner;
   }
 
-  int getGanzzahl() {
+  public int getGanzzahl() {
     return ganzzahl;
   }
 
-  int getNenner() {
+  public int getNenner() {
     return nenner;
   }
 
-  int getZaehler() {
+  public int getZaehler() {
     return zaehler;
   }
 
@@ -67,11 +67,12 @@ public class Bruch {
   }
 
   public Bruch add(final Bruch bruch2) {
-    final Bruch summand1 = this.erweitern(bruch2);
-    final Bruch summand2 = bruch2.erweitern(this);
-    final int ganzzahlAddiert = summand1.getGanzzahl() + summand2.getGanzzahl();
+    final Bruch summand1 = zuBruchUmwandeln().erweitern(bruch2);
+      System.out.println("erweitert summand 1: "+summand1);
+    final Bruch summand2 = bruch2.zuBruchUmwandeln().erweitern(this);
+      System.out.println("erweitert summand 2: "+summand2);
     final int zaehlerAddiert = summand1.getZaehler() + summand2.getZaehler();
-    final Bruch summe = new Bruch(ganzzahlAddiert, zaehlerAddiert, summand1.getNenner());
+    final Bruch summe = new Bruch(0, zaehlerAddiert, summand1.getNenner());
     return summe.kuerzen();
   }
 
@@ -85,34 +86,44 @@ public class Bruch {
   }
 
   public Bruch kuerzen() {
+      int gekürzterZaehler = (zaehler) / Bruchs.ggtBerechnen(zaehler, nenner);
+      final int gekürzterNenner = nenner / Bruchs.ggtBerechnen(zaehler, nenner);
       if (ganzzahl < 0 && zaehler < 0) {
           System.out.println("ganzzahl und zaehler negativ");
       }
-      final int gekürzterZaehler = (zaehler) / Bruchs.testGGT(zaehler, nenner);
-      final int gekürzterNenner = nenner / Bruchs.testGGT(zaehler, nenner);
       return new Bruch(ganzzahl, gekürzterZaehler, gekürzterNenner);
   }
 
   public Bruch erweitern(final Bruch bruch2) {
-    final int kgv = Bruchs.testKGV(nenner, bruch2.getNenner());
+    final int kgv = Bruchs.kgvBerechnen(nenner, bruch2.getNenner());
     return new Bruch(this.getGanzzahl(), (kgv / nenner) * zaehler, kgv);
   }
 
-  public Bruch zuGanzzahlUmwandeln() {
-    int ueberhang = 0;
-    if (Bruchs.betragVon(zaehler) < nenner) {
-      return this;
-    } else if (Bruchs.betragVon(zaehler) == nenner) {
-      return new Bruch(ganzzahl + 1, 0, nenner);
-    } else {
-      for (int i = Bruchs.betragVon(zaehler); i > 0; i--) {
-        if (i % nenner == 0 && ueberhang == 0) {
-          ueberhang = i;
+    public Bruch zuGanzzahlUmwandeln() {
+        int ueberhang = 0;
+        if (Bruchs.betragVon(zaehler) < Bruchs.betragVon(nenner)) {
+            return this;
+        } else if (Bruchs.betragVon(zaehler) == Bruchs.betragVon(nenner) && ganzzahl > 0) {
+            return new Bruch(ganzzahl + 1, 0, nenner);
+        } else if (Bruchs.betragVon(zaehler) == Bruchs.betragVon(nenner) && ganzzahl < 0) {
+            return new Bruch(ganzzahl - 1, 0, nenner);
+        } else {
+            for (int i = Bruchs.betragVon(zaehler); i > 0; i--) {
+                if (i % nenner == 0 && ueberhang == 0) {
+                    ueberhang = i;
+                }
+            }
         }
-      }
+        if (ganzzahl > 0 && zaehler > 0) {
+            return new Bruch(ganzzahl + (ueberhang / nenner), zaehler - ueberhang, nenner);
+        } else if (ganzzahl > 0 && zaehler < 0) {
+            return new Bruch(ganzzahl + (ueberhang / nenner), zaehler + ueberhang, nenner);
+        } else if (ganzzahl < 0 && zaehler > 0) {
+            return new Bruch(ganzzahl - (ueberhang / nenner), zaehler - ueberhang, nenner);
+        } else {
+            return new Bruch(ganzzahl - (ueberhang / nenner), zaehler + ueberhang, nenner);
+        }
     }
-    return new Bruch(ganzzahl + (ueberhang / nenner), zaehler - ueberhang, nenner);
-  }
 
   public Bruch zuBruchUmwandeln() {
     if (!ganzzahlIstNull()) {

@@ -14,7 +14,7 @@ public class BruchsTest {
     final Bruch bruch2 = new Bruch(1, 1, 23);
 
     //when
-    final int ggt = Bruchs.testGGT(bruch1.getNenner(), bruch2.getNenner());
+    final int ggt = Bruchs.ggtBerechnen(bruch1.getNenner(), bruch2.getNenner());
 
     //then
     assertThat(ggt, is(1));
@@ -27,7 +27,7 @@ public class BruchsTest {
     final Bruch bruch2 = new Bruch(1, 77, 16);
 
     //when
-    final int ggt = Bruchs.testGGT(bruch1.getNenner(), bruch2.getNenner());
+    final int ggt = Bruchs.ggtBerechnen(bruch1.getNenner(), bruch2.getNenner());
 
     //then
     assertThat(ggt, is(16));
