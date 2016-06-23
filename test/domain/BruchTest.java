@@ -144,4 +144,47 @@ public class BruchTest {
         assertThat(b2ErweitertUmB1.getZaehler(), is(6));
         assertThat(b2ErweitertUmB1.getNenner(), is(330));
     }
+
+    @Test
+    public void shouldUmwandelnZuGanzzahl() throws Exception {
+        // given
+        Bruch bruch1 = new Bruch(0,-25,4);
+        Bruch bruch2 = new Bruch(0,-23,4);
+        Bruch bruch3 = new Bruch(0,-21,4);
+
+        // when
+        Bruch testi1 = bruch1.zuGanzzahlUmwandeln();
+        Bruch testi2 = bruch2.zuGanzzahlUmwandeln();
+        Bruch testi3 = bruch3.zuGanzzahlUmwandeln();
+
+        // then
+        assertThat(testi1.getGanzzahl(), is(-6));
+        assertThat(testi1.getZaehler(), is(1));
+        assertThat(testi1.getNenner(), is(4));
+        assertThat(testi2.getGanzzahl(), is(-5));
+        assertThat(testi2.getZaehler(), is(3));
+        assertThat(testi2.getNenner(), is(4));
+        assertThat(testi3.getGanzzahl(), is(-5));
+        assertThat(testi3.getZaehler(), is(1));
+        assertThat(testi3.getNenner(), is(4));
+    }
+
+    @Test
+    public void shouldUmwandelnZuBruch() throws Exception {
+        // given
+        Bruch bruch1 = new Bruch(2,1,2);
+        Bruch bruch2 = new Bruch(-2,-1,2);
+
+        // when
+        Bruch testi1 = bruch1.zuBruchUmwandeln();
+        Bruch testi2 = bruch2.zuBruchUmwandeln();
+
+        // then
+        assertThat(testi1.getGanzzahl(), is(0));
+        assertThat(testi1.getZaehler(), is(5));
+        assertThat(testi1.getNenner(), is(2));
+        assertThat(testi2.getGanzzahl(), is(0));
+        assertThat(testi2.getZaehler(), is(-5));
+        assertThat(testi2.getNenner(), is(2));
+    }
 }

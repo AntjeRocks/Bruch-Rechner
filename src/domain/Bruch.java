@@ -77,8 +77,6 @@ public class Bruch {
   public Bruch sub(final Bruch bruch2) {
     final Bruch minuend = zuBruchUmwandeln().erweitern(bruch2);
     final Bruch subtrahend = bruch2.zuBruchUmwandeln().erweitern(this);
-      System.out.println("minuend: "+minuend);
-      System.out.println("subtrahend: "+subtrahend);
     final int ganzzahlSubtrahiert = minuend.getGanzzahl() - subtrahend.getGanzzahl();
     final int zaehlerSubtrahiert = minuend.getZaehler() - subtrahend.getZaehler();
     final Bruch differenz = new Bruch(ganzzahlSubtrahiert, zaehlerSubtrahiert, minuend.getNenner());
@@ -95,7 +93,7 @@ public class Bruch {
       }
   }
 
-    private Bruch getKuerzung(final int ganzMul, final int zaehMul) {
+  private Bruch getKuerzung(final int ganzMul, final int zaehMul) {
         int gekGanzzahl = ganzzahl*(ganzMul);
         int gekZaehler = (zaehler*(zaehMul) / Bruchs.ggtBerechnen(zaehler, nenner));
         int gekNenner = nenner / Bruchs.ggtBerechnen(zaehler, nenner);
@@ -107,7 +105,7 @@ public class Bruch {
     return new Bruch(this.getGanzzahl(), (kgv / nenner) * zaehler, kgv);
   }
 
-    public Bruch zuGanzzahlUmwandeln() {
+  public Bruch zuGanzzahlUmwandeln() {
         int ueberhang = 0;
         if (Bruchs.betragVon(zaehler) < Bruchs.betragVon(nenner)) {
             return this;
@@ -125,7 +123,7 @@ public class Bruch {
         if (ganzzahl >= 0 && zaehler > 0) {
             return new Bruch(ganzzahl + (ueberhang / nenner), zaehler - ueberhang, nenner);
         } else if (ganzzahl >= 0 && zaehler < 0) {
-            return new Bruch(ganzzahl + (ueberhang / nenner), zaehler + ueberhang, nenner);
+            return new Bruch((ganzzahl + (ueberhang / nenner)*(-1)), ((zaehler + ueberhang)*(-1)), nenner);
         } else if (ganzzahl < 0 && zaehler > 0) {
             return new Bruch(ganzzahl - (ueberhang / nenner), zaehler - ueberhang, nenner);
         } else {
@@ -134,8 +132,12 @@ public class Bruch {
     }
 
   public Bruch zuBruchUmwandeln() {
-    if (!ganzzahlIstNull()) {
+    if ((ganzzahl > 0 && zaehler > 0) || (ganzzahl < 0 && zaehler < 0)) {
       return new Bruch(0, (ganzzahl * nenner) + zaehler, nenner);
+    } else if (ganzzahl > 0 && zaehler < 0) {
+        return new Bruch(0, (ganzzahl * nenner * (-1)) - zaehler, nenner);
+    } else if (ganzzahl < 0 && zaehler > 0) {
+        return new Bruch(0, (ganzzahl * nenner) - zaehler, nenner);
     } else {
       return this;
     }
