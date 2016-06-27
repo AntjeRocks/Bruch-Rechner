@@ -3,6 +3,7 @@ package domain;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.Is.is;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 public class BruchTest {
@@ -186,5 +187,29 @@ public class BruchTest {
         assertThat(testi2.getGanzzahl(), is(0));
         assertThat(testi2.getZaehler(), is(-5));
         assertThat(testi2.getNenner(), is(2));
+    }
+
+    @Test
+    public void shouldUseConstructorWithNull() {
+        // given
+        try {
+            Bruch bruch = new Bruch(60, 5, 0);
+            Assert.fail("Fehler: Hier wurde eine Exception erwartet!");
+        } catch (IllegalArgumentException e) {
+            // then
+            assertThat((e.getMessage()), is("Der Nenner ist Null"));
+        }
+    }
+
+    @Test
+    public void shouldUseConstructorWithNegativ() {
+        // given
+        try {
+            Bruch bruch = new Bruch(60, 5, -1);
+            Assert.fail("Fehler: Hier wurde eine Exception erwartet!");
+        } catch (IllegalArgumentException e) {
+            // then
+            assertThat((e.getMessage()), is("Der Nenner ist negativ"));
+        }
     }
 }
