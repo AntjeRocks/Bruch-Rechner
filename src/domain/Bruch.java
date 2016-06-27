@@ -84,32 +84,12 @@ public class Bruch {
   }
 
   public Bruch kuerzen() {
-      int gekGanzzahl = 0;
-      int gekZaehler = 0;
       int zaehlerErweitert = (ganzzahl * nenner) + (zaehler);
 
-      if (Bruchs.betragVon(zaehlerErweitert) > nenner) {
-          gekGanzzahl = zaehlerErweitert / nenner;
-          gekZaehler = zaehlerErweitert - gekGanzzahl * nenner;
-
-      } else if (Bruchs.betragVon(zaehlerErweitert) == nenner) {
-
-      }
-            
       int gekZaehler = zaehlerErweitert / Bruchs.ggtBerechnen(zaehlerErweitert, nenner);
       int gekNenner = nenner / Bruchs.ggtBerechnen(zaehlerErweitert, nenner);
       return new Bruch(0, gekZaehler, gekNenner);
-
-
-
   }
-
-  private Bruch getKuerzung(final int ganzMul, final int zaehMul) {
-        int gekGanzzahl = ganzzahl*(ganzMul);
-        int gekZaehler = (zaehler*(zaehMul) / Bruchs.ggtBerechnen(zaehler, nenner));
-        int gekNenner = nenner / Bruchs.ggtBerechnen(zaehler, nenner);
-        return new Bruch(gekGanzzahl, gekZaehler, gekNenner);
-    }
 
   public Bruch erweitern(final Bruch bruch2) {
     final int kgv = Bruchs.kgvBerechnen(nenner, bruch2.getNenner());
@@ -143,14 +123,6 @@ public class Bruch {
     }
 
   public Bruch zuBruchUmwandeln() {
-    if ((ganzzahl > 0 && zaehler > 0) || (ganzzahl < 0 && zaehler < 0)) {
       return new Bruch(0, (ganzzahl * nenner) + zaehler, nenner);
-    } else if (ganzzahl > 0 && zaehler < 0) {
-        return new Bruch(0, (ganzzahl * nenner * (-1)) - zaehler, nenner);
-    } else if (ganzzahl < 0 && zaehler > 0) {
-        return new Bruch(0, (ganzzahl * nenner) - zaehler, nenner);
-    } else {
-      return this;
-    }
   }
 }
