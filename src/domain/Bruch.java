@@ -10,12 +10,20 @@ public class Bruch {
     ganzzahl = 0;
     zaehler = 0;
     nenner = 1;
+
+    // this(0,0,1);
   }
 
-  public Bruch(final int ganzzahl, final int zaehler, final int nenner) {
+  public Bruch (final int ganzzahl, final int zaehler, final int nenner) {
     this.ganzzahl = ganzzahl;
     this.zaehler = zaehler;
     this.nenner = nenner;
+      if (nenner == 0) {
+          throw new IllegalArgumentException("Der Nenner ist Null");
+      }
+      if (nenner < 0) {
+          throw new IllegalArgumentException("Der Nenner ist negativ");
+      }
   }
 
   public int getGanzzahl() {

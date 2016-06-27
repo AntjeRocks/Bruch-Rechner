@@ -2,10 +2,7 @@ package ui;
 
 import domain.Bruch;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 public class BruchController {
 
@@ -34,33 +31,38 @@ public class BruchController {
   private Bruch aktuellesErgebnis = new Bruch();
 
   public void los() {
-    final Bruch bruch1 = new Bruch(Integer.parseInt(ganzzahl1.getText()), (Integer.parseInt(zaehler1.getText())),
-      (Integer.parseInt(nenner1.getText())));
-    final Bruch bruch2 = new Bruch(Integer.parseInt(ganzzahl2.getText()), (Integer.parseInt(zaehler2.getText())),
-      (Integer.parseInt(nenner2.getText())));
-    switch (operator) {
-      case "+":
-        aktuellesErgebnis = bruch1.add(bruch2);
-        ergebnis.setText(aktuellesErgebnis.anzeigen());
-        break;
-      case "-":
-        aktuellesErgebnis = bruch1.sub(bruch2);
-        ergebnis.setText(aktuellesErgebnis.anzeigen());
-        break;
-      case "*":
-        aktuellesErgebnis = bruch1.mul(bruch2);
-        ergebnis.setText(aktuellesErgebnis.anzeigen());
-        break;
-      case "/":
-        aktuellesErgebnis = bruch1.div(bruch2);
-        ergebnis.setText(aktuellesErgebnis.anzeigen());
-        break;
-      default:
-        aktuellesErgebnis = bruch1.mul(bruch2);
-        ergebnis.setText(aktuellesErgebnis.anzeigen());
-    }
-    ganzzahlAnButton.setVisible(true);
-    ganzzahlAusButton.setVisible(true);
+      try {
+          final Bruch bruch1 = new Bruch(Integer.parseInt(ganzzahl1.getText()), (Integer.parseInt(zaehler1.getText())),
+                  (Integer.parseInt(nenner1.getText())));
+          final Bruch bruch2 = new Bruch(Integer.parseInt(ganzzahl2.getText()), (Integer.parseInt(zaehler2.getText())),
+                  (Integer.parseInt(nenner2.getText())));
+          switch (operator) {
+              case "+":
+                  aktuellesErgebnis = bruch1.add(bruch2);
+                  ergebnis.setText(aktuellesErgebnis.anzeigen());
+                  break;
+              case "-":
+                  aktuellesErgebnis = bruch1.sub(bruch2);
+                  ergebnis.setText(aktuellesErgebnis.anzeigen());
+                  break;
+              case "*":
+                  aktuellesErgebnis = bruch1.mul(bruch2);
+                  ergebnis.setText(aktuellesErgebnis.anzeigen());
+                  break;
+              case "/":
+                  aktuellesErgebnis = bruch1.div(bruch2);
+                  ergebnis.setText(aktuellesErgebnis.anzeigen());
+                  break;
+              default:
+                  aktuellesErgebnis = bruch1.mul(bruch2);
+                  ergebnis.setText(aktuellesErgebnis.anzeigen());
+          }
+          ganzzahlAnButton.setVisible(true);
+          ganzzahlAusButton.setVisible(true);
+      } catch (IllegalArgumentException e) {
+          Alert alert = new Alert(Alert.AlertType.ERROR, e.getMessage());
+          alert.show();
+      }
   }
 
   public void selectOperator() {
