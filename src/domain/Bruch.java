@@ -84,13 +84,24 @@ public class Bruch {
   }
 
   public Bruch kuerzen() {
-      if (ganzzahl <= 0) {
-          return (getKuerzung(1, 1));
-      } else if (ganzzahl > 0 && zaehler < 0) {
-          return getKuerzung(-1, -1);
-      } else {
-          return getKuerzung(1, 1);
+      int gekGanzzahl = 0;
+      int gekZaehler = 0;
+      int zaehlerErweitert = (ganzzahl * nenner) + (zaehler);
+
+      if (Bruchs.betragVon(zaehlerErweitert) > nenner) {
+          gekGanzzahl = zaehlerErweitert / nenner;
+          gekZaehler = zaehlerErweitert - gekGanzzahl * nenner;
+
+      } else if (Bruchs.betragVon(zaehlerErweitert) == nenner) {
+
       }
+            
+      int gekZaehler = zaehlerErweitert / Bruchs.ggtBerechnen(zaehlerErweitert, nenner);
+      int gekNenner = nenner / Bruchs.ggtBerechnen(zaehlerErweitert, nenner);
+      return new Bruch(0, gekZaehler, gekNenner);
+
+
+
   }
 
   private Bruch getKuerzung(final int ganzMul, final int zaehMul) {
