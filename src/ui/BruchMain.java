@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.util.IllegalFormatException;
-
 public class BruchMain extends Application {
 
   public static void main(final String[] args) {

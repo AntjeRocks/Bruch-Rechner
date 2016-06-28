@@ -31,7 +31,7 @@ public class BruchTest {
     }
 
     @Test
-    public void shouldGetGanzzahlMultiply() throws Exception {
+    public void shouldGetGanzzahlWithMultiply() throws Exception {
         // given
         final Bruch bruch = new Bruch(3 * 7, 1, 2);
 
@@ -42,7 +42,7 @@ public class BruchTest {
     }
 
     @Test
-    public void shouldGetGanzzahlSub() throws Exception {
+    public void shouldGetGanzzahlWithSubtraction() throws Exception {
         // given
         final Bruch bruch = new Bruch(7 - 3, 1, 2);
 
@@ -141,6 +141,7 @@ public class BruchTest {
         assertThat(b1ErweitertUmB2.getGanzzahl(), is(5));
         assertThat(b1ErweitertUmB2.getZaehler(), is(385));
         assertThat(b1ErweitertUmB2.getNenner(), is(330));
+
         assertThat(b2ErweitertUmB1.getGanzzahl(), is(3));
         assertThat(b2ErweitertUmB1.getZaehler(), is(6));
         assertThat(b2ErweitertUmB1.getNenner(), is(330));
@@ -153,21 +154,51 @@ public class BruchTest {
         Bruch bruch2 = new Bruch(0,-23,4);
         Bruch bruch3 = new Bruch(0,-21,4);
 
+        Bruch bruch5 = new Bruch(3,17,4);
+        Bruch bruch6 = new Bruch(3,-17,4);
+        Bruch bruch7 = new Bruch(-3,17,4);
+        Bruch bruch8 = new Bruch(-3,-17,4);
+
         // when
         Bruch testi1 = bruch1.zuGanzzahlUmwandeln();
         Bruch testi2 = bruch2.zuGanzzahlUmwandeln();
         Bruch testi3 = bruch3.zuGanzzahlUmwandeln();
 
+        Bruch testi5 = bruch5.zuGanzzahlUmwandeln();
+        Bruch testi6 = bruch6.zuGanzzahlUmwandeln();
+        Bruch testi7 = bruch7.zuGanzzahlUmwandeln();
+        Bruch testi8 = bruch8.zuGanzzahlUmwandeln();
+
         // then
+        // bruch1
         assertThat(testi1.getGanzzahl(), is(-6));
-        assertThat(testi1.getZaehler(), is(1));
+        assertThat(testi1.getZaehler(), is(-1));
         assertThat(testi1.getNenner(), is(4));
+        // bruch2
         assertThat(testi2.getGanzzahl(), is(-5));
-        assertThat(testi2.getZaehler(), is(3));
+        assertThat(testi2.getZaehler(), is(-3));
         assertThat(testi2.getNenner(), is(4));
+        // bruch3
         assertThat(testi3.getGanzzahl(), is(-5));
-        assertThat(testi3.getZaehler(), is(1));
+        assertThat(testi3.getZaehler(), is(-1));
         assertThat(testi3.getNenner(), is(4));
+
+        // bruch5
+        assertThat(testi5.getGanzzahl(), is(7));
+        assertThat(testi5.getZaehler(), is(1));
+        assertThat(testi5.getNenner(), is(4));
+        // bruch6
+        assertThat(testi6.getGanzzahl(), is(-1));
+        assertThat(testi6.getZaehler(), is(-1));
+        assertThat(testi6.getNenner(), is(4));
+        // bruch7
+        assertThat(testi7.getGanzzahl(), is(1));
+        assertThat(testi7.getZaehler(), is(1));
+        assertThat(testi7.getNenner(), is(4));
+        // bruch8
+        assertThat(testi8.getGanzzahl(), is(-7));
+        assertThat(testi8.getZaehler(), is(-1));
+        assertThat(testi8.getNenner(), is(4));
     }
 
     @Test
@@ -184,16 +215,17 @@ public class BruchTest {
         assertThat(testi1.getGanzzahl(), is(0));
         assertThat(testi1.getZaehler(), is(5));
         assertThat(testi1.getNenner(), is(2));
+
         assertThat(testi2.getGanzzahl(), is(0));
         assertThat(testi2.getZaehler(), is(-5));
         assertThat(testi2.getNenner(), is(2));
     }
 
     @Test
-    public void shouldUseConstructorWithNull() {
+    public void shouldThrowExceptionWhenUsingDenumeratorWithZero() {
         // given
         try {
-            Bruch bruch = new Bruch(60, 5, 0);
+           new Bruch(60, 5, 0);
             Assert.fail("Fehler: Hier wurde eine Exception erwartet!");
         } catch (IllegalArgumentException e) {
             // then
@@ -202,10 +234,10 @@ public class BruchTest {
     }
 
     @Test
-    public void shouldUseConstructorWithNegativ() {
+    public void shouldThrowExceptionWhenUsingNegativDenumerator() {
         // given
         try {
-            Bruch bruch = new Bruch(60, 5, -1);
+            new Bruch(60, 5, -1);
             Assert.fail("Fehler: Hier wurde eine Exception erwartet!");
         } catch (IllegalArgumentException e) {
             // then
