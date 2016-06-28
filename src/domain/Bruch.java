@@ -63,6 +63,10 @@ public final class Bruch {
     return mul(divisor.kehrwert());
   }
 
+  private Bruch kehrwert() {
+    return new Bruch(ganzzahl,nenner,zaehler);
+  }
+
   public Bruch add(final Bruch bruch2) {
     final Bruch summand1 = zuBruchUmwandeln().erweitern(bruch2);
     final Bruch summand2 = bruch2.zuBruchUmwandeln().erweitern(this);
@@ -74,6 +78,10 @@ public final class Bruch {
   public Bruch sub(final Bruch subtrahend) {
     final Bruch differenz = add(subtrahend.zaehlerNegieren());
     return differenz.kuerzen();
+  }
+
+  private Bruch zaehlerNegieren() {
+    return new Bruch(ganzzahl, zaehler*(-1), nenner);
   }
 
   public Bruch kuerzen() {
@@ -123,13 +131,5 @@ public final class Bruch {
 
   private boolean zaehlerIstNull() {
       return zaehler == 0;
-  }
-
-  private Bruch kehrwert() {
-      return new Bruch(ganzzahl,nenner,zaehler);
-  }
-
-  private Bruch zaehlerNegieren() {
-    return new Bruch(ganzzahl, zaehler*(-1), nenner);
   }
 }
