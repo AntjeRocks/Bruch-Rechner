@@ -11,15 +11,14 @@ public final class Bruch {
   }
 
   public Bruch (final int ganzzahl, final int zaehler, final int nenner) {
+    if (nenner == 0) {
+      throw new IllegalArgumentException("Der Nenner ist Null");
+    } else if (nenner < 0) {
+      throw new IllegalArgumentException("Der Nenner ist negativ");
+    }
     this.ganzzahl = ganzzahl;
     this.zaehler = zaehler;
     this.nenner = nenner;
-      if (nenner == 0) {
-          throw new IllegalArgumentException("Der Nenner ist Null");
-      }
-      if (nenner < 0) {
-          throw new IllegalArgumentException("Der Nenner ist negativ");
-      }
   }
 
   public int getGanzzahl() {
@@ -34,7 +33,7 @@ public final class Bruch {
     return zaehler;
   }
 
-  // In der Aufgabe sollen setter erstellt werden. Diese sind immutable (not changeable)
+  // In der Aufgabe sollen setter erstellt werden. Die Klasse soll aber immutable sein
 
   public String anzeigen() {
     if (!ganzzahlIstNull() && !zaehlerIstNull()) {
