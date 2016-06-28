@@ -12,15 +12,6 @@
 <AnchorPane fx:controller="ui.BruchController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="600"
             prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
   <children>
-    <MenuBar layoutY="2.0" prefHeight="25.0" prefWidth="Infinity">
-      <menus>
-        <Menu mnemonicParsing="false" text="Datei">
-          <items>
-            <MenuItem mnemonicParsing="false" text="Schließen"/>
-          </items>
-        </Menu>
-      </menus>
-    </MenuBar>
     <TextField layoutX="15.0" layoutY="40.0" fx:id="ganzzahl1" text="0" prefHeight="75.0" prefWidth="100.0" style="-fx-font-size: 25"/>
     <TextField layoutX="120.0" layoutY="40.0" fx:id="zaehler1" text="1" prefWidth="75"/>
     <TextField layoutX="120.0" layoutY="90.0" fx:id="nenner1" text="4" prefWidth="75"/>
@@ -30,7 +21,9 @@
     <Button layoutX="130.0" layoutY="140.0" mnemonicParsing="false" text="Berechnen" onAction="#los"/>
     <Button layoutX="130.0" layoutY="170.0" mnemonicParsing="false" text="Ganzzahl An" onAction="#ganzzahlAn" fx:id="ganzzahlAnButton" visible="false"/>
     <Button layoutX="130.0" layoutY="200.0" mnemonicParsing="false" text="Ganzzahl Aus" onAction="#ganzzahlAus" fx:id="ganzzahlAusButton" visible="false"/>
-    <Label layoutX="486.0" layoutY="44.0" text="Ergebnis" fx:id="ergebnis" visible="true"/>
+    <Label layoutX="450.0" layoutY="65.0" text="Ergebnis" fx:id="ergebnis" visible="true" style="-fx-font-size: 15"/>
+    <Button layoutX="15.0" layoutY="120.0" mnemonicParsing="false" text="Zufall" onAction="#zufallBruch1"/>
+    <Button layoutX="250.0" layoutY="120.0" mnemonicParsing="false" text="Zufall" onAction="#zufallBruch2"/>
     <ChoiceBox layoutX="200.5" layoutY="65.0" fx:id="choiceboxi" value="*" onAction="#selectOperator">
       <items>
         <FXCollections fx:factory="observableArrayList">

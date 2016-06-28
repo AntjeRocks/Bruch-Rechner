@@ -27,6 +27,7 @@ public final class Bruchs {
         for (int i = betragVon(zahl1); i > 0; i--) {
             if (zahl1 % i == 0 && zahl2 % i == 0 && ggt == 0) {
                 ggt = i;
+                break;
             }
         }
         return ggt;
