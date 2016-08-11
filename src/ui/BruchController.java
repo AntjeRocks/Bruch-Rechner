@@ -106,7 +106,7 @@ public class BruchController {
   private int randomIntPositiv() {
     Random random = new Random();
     int nextInt = random.nextInt(254);
-    return nextInt+1;
+      return nextInt+1;
   }
 
 }
