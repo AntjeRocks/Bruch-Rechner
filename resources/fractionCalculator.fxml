@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane fx:controller="ui.FractionController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="200" minWidth="600"
+            prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+    <TextField layoutX="15.0" layoutY="40.0" fx:id="fractionalInteger1" text="0" prefHeight="75.0" prefWidth="100.0" style="-fx-font-size: 25"/>
+    <TextField layoutX="120.0" layoutY="40.0" fx:id="numerator1" text="1" prefWidth="75"/>
+    <TextField layoutX="120.0" layoutY="90.0" fx:id="denominator1" text="4" prefWidth="75"/>
+    <TextField layoutX="250.0" layoutY="40.0" fx:id="fractionalInteger2" text="0" prefHeight="75.0" prefWidth="100.0" style="-fx-font-size: 25"/>
+    <TextField layoutX="355.0" layoutY="40.0" fx:id="numerator2" text="1" prefWidth="75"/>
+    <TextField layoutX="355.0" layoutY="90.0" fx:id="denominator2" text="2" prefWidth="75"/>
+    <Button layoutX="130.0" layoutY="140.0" mnemonicParsing="false" text="Berechnen" onAction="#calculate"/>
+    <Button layoutX="130.0" layoutY="170.0" mnemonicParsing="false" text="Ganzzahl An" onAction="#fractionalIntegerOn" fx:id="buttonFractionalIntegerOn" visible="false"/>
+    <Button layoutX="130.0" layoutY="200.0" mnemonicParsing="false" text="Ganzzahl Aus" onAction="#fractionalIntegerOff" fx:id="buttonFractionalIntegerOff" visible="false"/>
+    <Label layoutX="450.0" layoutY="65.0" text="Ergebnis" fx:id="result" visible="true" style="-fx-font-size: 15"/>
+    <Button layoutX="15.0" layoutY="120.0" mnemonicParsing="false" text="Zufall" onAction="#randomFraction1"/>
+    <Button layoutX="250.0" layoutY="120.0" mnemonicParsing="false" text="Zufall" onAction="#randomFraction2"/>
+    <ChoiceBox layoutX="200.5" layoutY="65.0" fx:id="choiceBoxOperator" value="*" onAction="#selectOperator">
+      <items>
+        <FXCollections fx:factory="observableArrayList">
+          <String fx:value="+"/>
+          <String fx:value="-"/>
+          <String fx:value="*"/>
+          <String fx:value="/"/>
+        </FXCollections>
+      </items>
+    </ChoiceBox>
+  </children>
+</AnchorPane>

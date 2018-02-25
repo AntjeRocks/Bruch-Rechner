@@ -6,12 +6,12 @@ import static org.hamcrest.core.Is.is;
 import org.junit.Assert;
 import org.junit.Test;
 
-public class BruchTest {
+public class FractionTest {
 
     @Test
     public void shouldGetGanzzahlPostiv() throws Exception {
         // given
-        final Bruch bruch = new Bruch(712, 1, 2);
+        final Fraction bruch = new Fraction(712, 1, 2);
 
         // when
 
@@ -22,7 +22,7 @@ public class BruchTest {
     @Test
     public void shouldGetGanzzahlNegtiv() throws Exception {
         // given
-        final Bruch bruch = new Bruch(-8745, 1, 2);
+        final Fraction bruch = new Fraction(-8745, 1, 2);
 
         // when
 
@@ -33,7 +33,7 @@ public class BruchTest {
     @Test
     public void shouldGetGanzzahlWithMultiply() throws Exception {
         // given
-        final Bruch bruch = new Bruch(3 * 7, 1, 2);
+        final Fraction bruch = new Fraction(3 * 7, 1, 2);
 
         // when
 
@@ -44,7 +44,7 @@ public class BruchTest {
     @Test
     public void shouldGetGanzzahlWithSubtraction() throws Exception {
         // given
-        final Bruch bruch = new Bruch(7 - 3, 1, 2);
+        final Fraction bruch = new Fraction(7 - 3, 1, 2);
 
         // when
 
@@ -55,11 +55,11 @@ public class BruchTest {
     @Test
     public void shouldMultiplyPositiv() throws Exception {
         // given
-        final Bruch bruch1 = new Bruch(1, 15, 3);
-        final Bruch bruch2 = new Bruch(0, 6, 5);
+        final Fraction bruch1 = new Fraction(1, 15, 3);
+        final Fraction bruch2 = new Fraction(0, 6, 5);
 
         // when
-        final Bruch produkt = bruch1.mul(bruch2);
+        final Fraction produkt = bruch1.multiplication(bruch2);
 
         // then
         assertThat(produkt.getGanzzahl(), is(0));
@@ -70,11 +70,11 @@ public class BruchTest {
     @Test
     public void shouldMultiplyNegativ() throws Exception {
         // given
-        final Bruch bruch1 = new Bruch(2, -33, 5);
-        final Bruch bruch2 = new Bruch(0, 4, 7);
+        final Fraction bruch1 = new Fraction(2, -33, 5);
+        final Fraction bruch2 = new Fraction(0, 4, 7);
 
         // when
-        final Bruch produkt = bruch1.mul(bruch2);
+        final Fraction produkt = bruch1.multiplication(bruch2);
 
         // then
         assertThat(produkt.getGanzzahl(), is(0));
