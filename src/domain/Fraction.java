@@ -67,7 +67,7 @@ public final class Fraction {
       return new Fraction(0, reducedNumerator, reducedDenominator);
   }
 
-  private Fraction expand(final Fraction fraction2) {
+  Fraction expand(final Fraction fraction2) {
     final int leastCommonMultiple = Fractions.leastCommonMultiple(denominator, fraction2.denominator);
     return new Fraction(fractionalInteger, (leastCommonMultiple / denominator) * numerator, leastCommonMultiple);
   }
@@ -107,5 +107,17 @@ public final class Fraction {
 
   private boolean numeratorIsNull() {
       return numerator == 0;
+  }
+
+  public int getFractionalInteger() {
+    return fractionalInteger;
+  }
+
+  public int getNumerator() {
+    return numerator;
+  }
+
+  public int getDenominator() {
+    return denominator;
   }
 }
