@@ -1,6 +1,6 @@
 package ui;
 
-import domain.Rename1;
+import domain.Fraction;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -30,13 +30,13 @@ public class FractionController {
   Button buttonFractionalIntegerOff;
 
   private String operator = "";
-  private Rename1 currentFraction = new Rename1();
+  private Fraction currentFraction = new Fraction();
 
   public void calculate() {
       try {
-          final Rename1 fraction1 = new Rename1(Integer.parseInt(fractionalInteger1.getText()), (Integer.parseInt(numerator1.getText())),
+          final Fraction fraction1 = new Fraction(Integer.parseInt(fractionalInteger1.getText()), (Integer.parseInt(numerator1.getText())),
                   (Integer.parseInt(denominator1.getText())));
-          final Rename1 fraction2 = new Rename1(Integer.parseInt(fractionalInteger2.getText()), (Integer.parseInt(numerator2.getText())),
+          final Fraction fraction2 = new Fraction(Integer.parseInt(fractionalInteger2.getText()), (Integer.parseInt(numerator2.getText())),
                   (Integer.parseInt(denominator2.getText())));
           switch (operator) {
               case "+":

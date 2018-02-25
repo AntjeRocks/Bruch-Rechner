@@ -1,16 +1,16 @@
 package domain;
 
-public final class Rename1 {
+public final class Fraction {
 
   private final int fractionalInteger;
   private final int numerator;
   private final int denominator;
 
-  public Rename1() {
+  public Fraction() {
     this(0,0,1);
   }
 
-  public Rename1(final int fractionalInteger, final int numerator, final int denominator) {
+  public Fraction(final int fractionalInteger, final int numerator, final int denominator) {
     if (denominator == 0 || denominator < 0) {
       throw new IllegalArgumentException("Der Nenner ist Null oder kleiner als Null");
     }
@@ -29,64 +29,64 @@ public final class Rename1 {
     }
   }
 
-  public Rename1 multiplication(Rename1 fraction2) {
-    final Rename1 factor1 = transformToFractionWithoutFractionalInteger();
-    final Rename1 factor2 = fraction2.transformToFractionWithoutFractionalInteger();
-    final Rename1 product = new Rename1(0, factor1.numerator * factor2.numerator, factor1.denominator * factor2.denominator);
+  public Fraction multiplication(Fraction fraction2) {
+    final Fraction factor1 = transformToFractionWithoutFractionalInteger();
+    final Fraction factor2 = fraction2.transformToFractionWithoutFractionalInteger();
+    final Fraction product = new Fraction(0, factor1.numerator * factor2.numerator, factor1.denominator * factor2.denominator);
     return product.reduce();
   }
 
-  public Rename1 division(final Rename1 divisor) {
+  public Fraction division(final Fraction divisor) {
     return multiplication(divisor.reciprocal());
   }
 
-  public Rename1 addition(final Rename1 fraction2) {
-    final Rename1 addend1 = transformToFractionWithoutFractionalInteger().expand(fraction2);
-    final Rename1 addend2 = fraction2.transformToFractionWithoutFractionalInteger().expand(this);
-    final Rename1 sum = new Rename1(0, addend1.numerator + addend2.numerator, addend1.denominator);
+  public Fraction addition(final Fraction fraction2) {
+    final Fraction addend1 = transformToFractionWithoutFractionalInteger().expand(fraction2);
+    final Fraction addend2 = fraction2.transformToFractionWithoutFractionalInteger().expand(this);
+    final Fraction sum = new Fraction(0, addend1.numerator + addend2.numerator, addend1.denominator);
     return sum.reduce();
   }
 
-  public Rename1 subtraction(final Rename1 subtrahend) {
-    final Rename1 difference = addition(subtrahend.negateNumerator());
+  public Fraction subtraction(final Fraction subtrahend) {
+    final Fraction difference = addition(subtrahend.negateNumerator());
     return difference.reduce();
   }
 
-  private Rename1 reciprocal() {
-    return new Rename1(fractionalInteger, denominator, numerator);
+  private Fraction reciprocal() {
+    return new Fraction(fractionalInteger, denominator, numerator);
   }
 
-  private Rename1 negateNumerator() {
-    return new Rename1(fractionalInteger, numerator * -1, denominator);
+  private Fraction negateNumerator() {
+    return new Fraction(fractionalInteger, numerator * -1, denominator);
   }
 
-  private Rename1 reduce() {
+  private Fraction reduce() {
       int expandedNumerator = (fractionalInteger * denominator) + (numerator);
       int reducedNumerator = expandedNumerator / Fractions.greatestCommonDivisor(expandedNumerator, denominator);
       int reducedDenominator = denominator / Fractions.greatestCommonDivisor(expandedNumerator, denominator);
-      return new Rename1(0, reducedNumerator, reducedDenominator);
+      return new Fraction(0, reducedNumerator, reducedDenominator);
   }
 
-  private Rename1 expand(final Rename1 fraction2) {
+  private Fraction expand(final Fraction fraction2) {
     final int leastCommonMultiple = Fractions.leastCommonMultiple(denominator, fraction2.denominator);
-    return new Rename1(fractionalInteger, (leastCommonMultiple / denominator) * numerator, leastCommonMultiple);
+    return new Fraction(fractionalInteger, (leastCommonMultiple / denominator) * numerator, leastCommonMultiple);
   }
 
-  public Rename1 transformToFractionWithoutFractionalInteger() {
-      return new Rename1(0, fractionalInteger * denominator + numerator, denominator);
+  public Fraction transformToFractionWithoutFractionalInteger() {
+      return new Fraction(0, fractionalInteger * denominator + numerator, denominator);
   }
 
-  public Rename1 transformToFractionWithFractionalInteger() {
-    final Rename1 fraction = transformToFractionWithoutFractionalInteger();
+  public Fraction transformToFractionWithFractionalInteger() {
+    final Fraction fraction = transformToFractionWithoutFractionalInteger();
 
     if (Fractions.amountOf(fraction.numerator) < Fractions.amountOf(fraction.denominator)) {
       return this;
     } else {
       int reducedShare = calculateReducedShare(Fractions.amountOf(fraction.numerator));
       if (fraction.numerator >= 0) {
-        return new Rename1(reducedShare / fraction.denominator, fraction.numerator - reducedShare, fraction.denominator);
+        return new Fraction(reducedShare / fraction.denominator, fraction.numerator - reducedShare, fraction.denominator);
       } else {
-        return new Rename1(reducedShare / fraction.denominator * -1, fraction.numerator + reducedShare, fraction.denominator);
+        return new Fraction(reducedShare / fraction.denominator * -1, fraction.numerator + reducedShare, fraction.denominator);
       }
     }
   }
